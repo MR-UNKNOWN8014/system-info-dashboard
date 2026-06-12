@@ -152,7 +152,7 @@ Python 3.8+ recommended. Works on Windows, Linux, and macOS.
 
 | Bug                                     | Cause                                                               | Fix                                                                    |
 | --------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Top processes showed 0% CPU             | `psutil.cpu_percent()` returns 0 on first call — needs two readings | Prime all processes, wait 0.5s, read again                             |
+| Top processes showed 0% CPU             | `psutil.cpu_percent()` returns 0 on first call, needs two readings | Prime all processes, wait 0.5s, read again                             |
 | Watch mode flickered on process section | Screen cleared before CPU sample completed                          | Buffer full output with `io.StringIO`, clear only when render is ready |
 
 
