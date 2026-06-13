@@ -1,6 +1,8 @@
 # CLI System Info Dashboard
 
-A terminal-based system monitoring dashboard built with Python and `psutil`. Displays live CPU, RAM, Disk, Network, and Process info with color-coded progress bars and a flicker free live watch mode.
+A terminal-based system monitoring dashboard built with Python and `psutil`.
+Displays live CPU, RAM, Disk, Network, and Process info with color-coded
+progress bars, a flicker-free live watch mode, and export to JSON, HTML, or CSV.
 
 ---
 
@@ -45,7 +47,7 @@ A terminal-based system monitoring dashboard built with Python and `psutil`. Dis
 - **Top processes**: top 5 processes ranked by real CPU usage (not zeroed readings)
 - **Color-coded bars**: green / yellow / red based on usage thresholds
 - **Live watch mode**: flicker-free auto-refresh at a configurable interval
-
+- **Output Export**: "--export" flag that lets you export the output as HTML, JSON or CSV
 ---
 
 ## Tech Stack
@@ -58,6 +60,7 @@ A terminal-based system monitoring dashboard built with Python and `psutil`. Dis
 |`datetime`|Uptime calculation and timestamps|
 |`os`|Cross-platform terminal clear|
 |`io` / `sys`|Output buffering for flicker-free watch mode|
+|`JSON`/`CSv`|built in modules for JSON and CSV export|
 
 ---
 
@@ -101,6 +104,9 @@ python dashboard.py --watch
 
 # Live refresh every 5 seconds
 python dashboard.py --watch --interval 5
+
+# Export the snapshot
+python dashboard.py --export json    # Other format includes HTML & CSV
 ```
 
 ### CLI Flags
@@ -109,6 +115,7 @@ python dashboard.py --watch --interval 5
 |---|---|---|
 |`--watch`|off|Enable live refresh mode|
 |`--interval N`|`2`|Refresh interval in seconds|
+|`--export`|off|Export the snapshot - choices: `HTML`, `JSON`, `CSV`|
 
 ---
 
@@ -154,6 +161,6 @@ Python 3.8+ recommended. Works on Windows, Linux, and macOS.
 | --------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | Top processes showed 0% CPU             | `psutil.cpu_percent()` returns 0 on first call, needs two readings | Prime all processes, wait 0.5s, read again                             |
 | Watch mode flickered on process section | Screen cleared before CPU sample completed                          | Buffer full output with `io.StringIO`, clear only when render is ready |
-
+| HTML export bars overflowed container | width: 862% had no max constraint | Added overflow: hidden on bar container + max-width: 100% on bar |
 
 ---
